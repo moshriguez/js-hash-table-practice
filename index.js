@@ -78,7 +78,7 @@ class HashTable {
         if (this.table[index] && this.table[index].length) {
             for (let i = 0; i < this.table[index].length; i++) {
                 if (this.table[index][i][0] === key) {
-                    this.table.splice(i, 1)
+                    this.table[index].splice(i, 1)
                     this.size--
                     return true
                 }
@@ -96,3 +96,19 @@ class HashTable {
     }
 }
 
+const ht = new HashTable();
+
+ht.set("France", 111);
+ht.set("Spain", 150);
+ht.set("ǻ", 192);
+
+ht.display();
+// 83: [ France: 111 ]
+// 126: [ Spain: 150 ],[ ǻ: 192 ]
+
+console.log(ht.size); // 3
+ht.remove("Spain");
+ht.display();
+// 83: [ France: 111 ]
+// 126: [ ǻ: 192 ]
+console.log(ht.get('France'))
